@@ -56,50 +56,43 @@ if (BRANCH == "master") {
         }
     }
 
+    node {
+        stage("Deploy to ACC") {
+            tryStep "deployment", {
+                build job: 'Subtask_Openstack_Playbook',
+                parameters: [
+                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datacatalogus.yml'],
+                ]
+            }
+        }
+    }
 
-      /* Disabled on api.data.amsterdam.nl datacatalogus is being run from api.secure.amsterdam.nl  */
-      /* Tests, however, are run on jenkins', not gitlab's pipeline */
+    stage('Waiting for approval') {
+        slackSend channel: '#ci-channel', color: 'warning', message: 'datacatalogus-API is waiting for Production Release - please confirm'
+        input "Deploy to Production?"
+    }
 
-//    node {
-//        stage("Deploy to ACC") {
-//            tryStep "deployment", {
-//                build job: 'Subtask_Openstack_Playbook',
-//                parameters: [
-//                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'acceptance'],
-//                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datacatalogus.yml'],
-//                ]
-//            }
-//        }
-//    }
+    node {
+        stage('Push production image') {
+            tryStep "image tagging", {
+                def image = docker.image("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}")
+                image.pull()
+                image.push("production")
+                image.push("latest")
+            }
+       }
+    }
 
-//    stage('Waiting for approval') {
-//        slackSend channel: '#ci-channel', color: 'warning', message: 'datacatalogus-API is waiting for Production Release - please confirm'
-//        input "Deploy to Production?"
-//    }
-
-//    node {
-//        stage('Push production image') {
-//            tryStep "image tagging", {
-//                def image = docker.image("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}")
-//                image.pull()
-//                image.push("production")
-//                image.push("latest")
-//            }
-//       }
-//    }
-//
-//
-//      /* Disabled. datacatalogus is being run from api.secure.amsterdam.nl  */
-//
-//    node {
-//        stage("Deploy") {
-//            tryStep "deployment", {
-//                build job: 'Subtask_Openstack_Playbook',
-//                parameters: [
-//                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
-//                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datacatalogus.yml'],
-//                ]
-//            }
-//        }
-//    }
+    node {
+        stage("Deploy") {
+            tryStep "deployment", {
+                build job: 'Subtask_Openstack_Playbook',
+                parameters: [
+                    [$class: 'StringParameterValue', name: 'INVENTORY', value: 'production'],
+                    [$class: 'StringParameterValue', name: 'PLAYBOOK', value: 'deploy-datacatalogus.yml'],
+                ]
+            }
+        }
+    }
 }
