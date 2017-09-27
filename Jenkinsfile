@@ -19,11 +19,8 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
 
 node {
     stage("Checkout") {
-	    checkout([
-	         $class: 'GitSCM',
-	         doGenerateSubmoduleConfigurations: true,
-	    ])
-//        checkout scm
+	    checkout scm
+	    sh 'git submodule update --init'
     }
 
 //    stage('Test') {
