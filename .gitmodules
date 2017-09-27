@@ -1,3 +1,3 @@
-[submodule "datacatalog"]
-	path = datacatalog
-	url = https://github.com/Amsterdam/datacatalog
+[submodule "datacatalog-core"]
+	path = datacatalog-core
+	url = https://github.com/Amsterdam/datacatalog-core
