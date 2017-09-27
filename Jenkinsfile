@@ -19,7 +19,14 @@ def tryStep(String message, Closure block, Closure tearDown = null) {
 
 node {
     stage("Checkout") {
-        checkout scm
+	    checkout([
+	         $class: 'GitSCM',
+	         doGenerateSubmoduleConfigurations: true,
+	         branches: scm.branches,
+	         extensions: scm.extensions,
+	         userRemoteConfigs: scm.userRemoteConfigs
+	    ])
+//        checkout scm
     }
 
 //    stage('Test') {
