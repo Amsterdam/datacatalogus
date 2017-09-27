@@ -22,9 +22,6 @@ node {
 	    checkout([
 	         $class: 'GitSCM',
 	         doGenerateSubmoduleConfigurations: true,
-	         branches: scm.branches,
-	         extensions: scm.extensions,
-	         userRemoteConfigs: scm.userRemoteConfigs
 	    ])
 //        checkout scm
     }
