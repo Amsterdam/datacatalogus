@@ -35,7 +35,7 @@ node {
 
     stage("Build image") {
         tryStep "build", {
-            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}", "web")
+            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}", "datacatalog/web")
             image.push()
         }
     }
