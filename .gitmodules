@@ -1,0 +1,3 @@
+[submodule "datacatalog"]
+	path = datacatalog
+	url = https://github.com/Amsterdam/datacatalog
