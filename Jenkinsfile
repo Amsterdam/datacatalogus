@@ -21,6 +21,7 @@ node {
     stage("Checkout") {
 	    checkout scm
 	    sh 'git submodule update --init'
+	    sh 'git pull --recurse-submodules'
     }
 
 //    stage('Test') {
