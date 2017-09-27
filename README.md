@@ -12,5 +12,5 @@ Dat vereist bij checkout de `--recursvie` vlag:
 	
 Wijzigingen in het datacatalog project komen niet automatisch in dit project, die moet je expliciet meenemen:
 
-	$ git pull --recurse-submodules
+	$ it submodule update --recursive --remote
 	
