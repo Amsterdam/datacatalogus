@@ -5,8 +5,8 @@ alle code en configuratie specifiek voor Amsterdam en Datapunt is terug te vinde
 
 ### datacatalog-core als submodule
 
-Het datacatalog-core project is als een git [submodule](https://github.com/blog/2104-working-with-submodules) bijgesloten. 
-Dat vereist bij checkout de `--recursvie` vlag:
+Het datacatalog-core project is als een git [submodule](https://github.com/blog/2104-working-with-submodules)
+bijgesloten. Dat vereist bij checkout de `--recursvie` vlag:
 
 	$ git clone --recursive git@github.com:Amsterdam/datacatalogus.git
 	

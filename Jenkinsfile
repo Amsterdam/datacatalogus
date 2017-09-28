@@ -24,16 +24,11 @@ node {
 	    sh 'git submodule update --recursive --remote'
     }
 
-//    stage('Test') {
-//        tryStep "test", {
-
-//            sh "docker-compose -p datacatalogus -f web/.jenkins/test/docker-compose.yml build && " +
-//                    "docker-compose -p datacatalogus -f web/.jenkins/test/docker-compose.yml run -u root --rm tests"
-
-//        }, {
-//           sh "docker-compose -p datacatalogus -f web/.jenkins/test/docker-compose.yml down"
-//        }
-//    }
+    stage('Test') {
+        tryStep "test", {
+            sh "datacatalog-core/test/test.sh"
+        }
+    }
 
     stage("Build image") {
         tryStep "build", {
