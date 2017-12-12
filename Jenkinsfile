@@ -26,13 +26,13 @@ node {
 
     stage('Test') {
         tryStep "test", {
-            sh "datacatalog-core/test/test.sh"
+            sh "datacatalog-core/test.sh"
         }
     }
 
     stage("Build image") {
         tryStep "build", {
-            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}", "datacatalog-core/web")
+            def image = docker.build("build.datapunt.amsterdam.nl:5000/datapunt/datacatalogus:${env.BUILD_NUMBER}", ".")
             image.push()
         }
     }
