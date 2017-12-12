@@ -14,3 +14,10 @@ Wijzigingen in het datacatalog-core project komen niet automatisch in dit projec
 
 	$ git submodule update --recursive --remote
 	
+### import legacy data
+
+	$ import/import.sh
+	
+(Hiervoor is Python >= 3.6 nodig. Probleempje met ssh in Python? Zie deze 
+[fix](https://stackoverflow.com/questions/42098126/mac-osx-python-ssl-sslerror-ssl-certificate-verify-failed-certificate-verify) 
+van Stackoverflow)

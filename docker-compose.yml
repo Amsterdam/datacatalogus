@@ -1,6 +1,6 @@
 version: "3.0"
 services:
   web:
-    build: ./datacatalog-core/web
+    build: .
     ports:
       - "8122:8000"
