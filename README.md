@@ -16,8 +16,6 @@ Wijzigingen in het datacatalog-core project komen niet automatisch in dit projec
 	
 ### import legacy data
 
-	$ import/import.sh
-	
-(Hiervoor is Python >= 3.6 nodig. Probleempje met ssh in Python? Zie deze 
-[fix](https://stackoverflow.com/questions/42098126/mac-osx-python-ssl-sslerror-ssl-certificate-verify-failed-certificate-verify) 
-van Stackoverflow)
+Bij startup downloadt de docker meteen de legacy data van de huidige datapunt implementatie.
+
+(Zie `Dockerfile` in de root van dit project, en `import/get_packages`)
